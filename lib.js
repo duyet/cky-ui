@@ -125,7 +125,6 @@ function cky_offline(grammar, sentence, eh) {
                 console.log(nt)
               }
 
-              console.log(rhss, 'rhss')
               merge_arrays(nt, rhss);
               eh.found_match(N - 1 - i, x, N - 1 - y, i - 1);
               eh.cell_updated(N - 1 - y, x, nt);

@@ -1,2 +1,5 @@
-# nlp-cky-parser
-CKY algorithm for generating parse trees, given a CFG (in almost-CNF) and a sentence.
+# CKY Algorithm
+CKY algorithm for generating parse trees, given a CNF and a sentence.
+
+
+![demo.gif](demo.gif)
