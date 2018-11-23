@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CKY UI</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet" />
+  <link href="app.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="lib.js" type="text/javascript"></script>
+  <script src="app.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $.get('grammar.txt', function(data) {
+        $('#grammar').val(data);
+      })
+
+      $('#submit').click(function() {
+        var grammar_val = $('#grammar').val()
+        var input_text_val = $('#input_text').val()
+        do_parse(grammar_val, input_text_val);
+        
+        $('html, body').animate({
+            scrollTop: $("#cky_output").offset().top
+        }, 1000);
+
+      })
+    })
+  </script>
+
+</head>
+
+<body>
+
+
+  <div class="container">
+    <header class="blog-header py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+
+        <div class="col text-center">
+          <a class="blog-header-logo text-dark" href="#">CKY Parser</a>
+        </div>
+      </div>
+    </header>
+
+
+    <div class="row mb-4 mt-4">
+      <div class="col">
+        <div class="card flex-md-row mb-4 shadow-sm">
+          <div class="card-body">
+            <strong class="d-inline-block mb-2 text-primary">Gammar (CNF)</strong>
+            <div class="form-group">
+              <textarea name="grammar" id="grammar" class="form-control" rows="10" placeholder="e.g. S -> NP VP"
+                aria-describedby="helpGrammar">
+              </textarea>
+              <small id="helpGrammar" class="text-muted">CNF Format</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card flex-md-row mb-4 shadow-sm">
+          <div class="card-body">
+            <strong class="d-inline-block mb-2 text-primary">Input text</strong>
+            <div class="form-group">
+              <input type="text" name="input_text" id="input_text" class="form-control" placeholder="" aria-describedby="helpInput" value="the chef eats fish with the chopsticks">
+              <small id="helpInput" class="text-muted"></small>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-outline btn-lg btn-block" id="submit">Start</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <div id="cky_output" style="display:none">
+          <!-- <table class="table" id="columnsCount" width="3%" height="100%" bgcolor="CC99CC" align="left"></table> -->
+          <table class="table" id="tsentence"></table>
+          <!-- <table class="table " id="rowsCount" width="97%" height="3%" bgcolor="CC99CC"></table> -->
+          <table class="table table-bordered" id="tchart" width="97%" height="90%"></table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
