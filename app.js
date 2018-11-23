@@ -76,6 +76,7 @@ function do_parse(grammar_val, input_text_val) {
   }
 
   cky_event_handler.cell_updated = function (i, j, content) {
+    content = content + '('+ i + ', ' + j +')'
     _update_actions.push("paint_cell(" + i + "," + j + ",COLOR_ACTIVE_CELL);" +
       "set_entry_content(" + i + "," + j + ",\"" + content + "\");");
     _update_actions.push("--");
