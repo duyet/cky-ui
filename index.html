@@ -21,6 +21,8 @@
         $('#grammar').val(data);
       })
 
+      $('#input_text').val('nó vừa gặp mấy người bạn trường cũ')
+
       $('#submit').click(function() {
         var grammar_val = $('#grammar').val()
         var input_text_val = $('#input_text').val()
@@ -71,7 +73,7 @@
           <div class="card-body">
             <strong class="d-inline-block mb-2 text-primary">Input text</strong>
             <div class="form-group">
-              <input type="text" name="input_text" id="input_text" class="form-control" placeholder="" aria-describedby="helpInput" value="the chef eats fish with the chopsticks">
+              <input type="text" name="input_text" id="input_text" class="form-control" placeholder="" aria-describedby="helpInput" value="">
               <small id="helpInput" class="text-muted"></small>
             </div>
 

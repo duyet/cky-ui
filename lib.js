@@ -1,3 +1,34 @@
+function unique(names) {
+  console.log('BEFORE:', names)
+  var uniqueNames = [];
+  $.each(names, function(i, el){
+      if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+  });
+  console.log('AFTER :', uniqueNames)
+  return uniqueNames;
+}
+
+function grammarToHashMap(rules) {
+  var hashMap = {};
+  for (var i in rules) {
+      var rule = rules[i];
+      var parts = rule.split('->');
+      var root = parts[0].trim();
+      
+      var productions = parts[1].split('|');
+      for(var j in productions) {
+          var childs = (productions[j].trim()).split(' ');
+          var key = makeKey(childs);
+          if (!hashMap[key]) {
+              hashMap[key] = [];
+          }
+          hashMap[key].push(root);
+      }        
+  }
+  return hashMap;
+}
+
+
 function array_index_of(a, e) {
   if (a != null) {
     for (var i = 0; i < a.length; ++i) {
@@ -20,17 +51,37 @@ function Grammar(grammar) {
 
   var re_rule = /^(\w+)\s*->\s*(\w+)(?:\s+(\w+))?\s*\.?$/;
   grammar = grammar.split(/\r?\n/);
+  grammar = grammar.filter(function(n) {
+      return n[0] != '#' && n.trim().length > 0
+  })
+  grammar = unique(grammar)
 
   for (var i = 0; i < grammar.length; ++i) {
     var r = grammar[i];
     if (r.length == 0)
       continue;
-    console.log(r, 'xxx')
     var a = re_rule.exec(r);
-    if (a == null) {
-      // throw "bad rule syntax: " + r;
-      continue
-    }
+
+    console.log('re_a', a)
+
+    var x = r.trim().split('->')
+    var a = []
+    
+    if (x[0] == null) continue;
+    a[0] = x[0].trim();
+
+    x[1] = x[1].trim()
+    a[1] = x[1].split(' ')[0]
+    a[2] = x[1].split(' ')[1] || null;
+
+    a.unshift(0)
+
+    console.log('split_a', a)
+
+    // if (a == null) {
+    //   throw "bad rule syntax: " + r;
+    //   continue
+    // }
 
     if (a[3]) {
       var new_rule = new Array(a[1], a[2], a[3]);

@@ -71,7 +71,7 @@ function grammarToHashMap(rules) {
             if (!hashMap[key]) {
                 hashMap[key] = [];
             }
-            hashMap[key].push(root);    
+            hashMap[key].push(root);
         }        
     }
     return hashMap;
@@ -125,12 +125,18 @@ function traverseParseTable(parseTable, left, right, rootIndex) {
 // }
 
 grammar = grammar.split('\n')
+grammar = grammar.filter(function(n) {
+    return n[0] != '#' && n.trim().length > 0
+})
+grammar = unique(grammar)
+
 var parseTable = parse(grammarToHashMap(grammar), input_text.split(' '));
 
 var tree_html = document.getElementById(tree_output_id);
 tree_html.innerHTML = ''
 for (var i in parseTable[0][parseTable.length - 1]) {
     tree_html.innerHTML += '<div class="tree" id="displayTree"><ul>' + traverseParseTable(parseTable, 0, parseTable.length - 1, i) + '</ul></div><br/>';
+    // break;
 }
 
 }

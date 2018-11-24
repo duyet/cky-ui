@@ -1,18 +1,31 @@
-S -> NP VBZ
+# dua be nhin dan chim dang bay
+
 S -> NP VP
-VP -> VP PP
-VP -> VBZ NP
-VP -> VBZ PP
-VP -> VBZ NNS
-VP -> VBZ VP
-VP -> VBP PP
-NP -> DT NN
-NP -> DT NNS
-PP -> IN NP
-DT -> the
-NN -> chef
-NNS -> fish
-NNS -> chopsticks
-VBP -> fish
-VBZ -> eats
-IN -> with
+NP -> N N
+NP -> NP VP
+VP -> V NP
+VP -> Adv V
+N -> dua
+N -> be
+N -> dan
+N -> chim
+V -> nhin
+V -> bay
+Adv -> dang
+
+# nó vừa gặp mấy người bạn trường cũ
+S -> NP VP
+NP -> nó
+NP -> N N
+NP -> N Adj
+NP -> Adj NP
+NP -> NP NP
+VP -> VP NP
+NP -> Q NP
+N -> người
+N -> bạn
+N -> trường
+V -> gặp
+Adv -> vừa
+Q -> mấy
+Adj -> cũ
