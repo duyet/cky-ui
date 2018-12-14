@@ -135,7 +135,8 @@ var parseTable = parse(grammarToHashMap(grammar), input_text.split(' '));
 var tree_html = document.getElementById(tree_output_id);
 tree_html.innerHTML = ''
 for (var i in parseTable[0][parseTable.length - 1]) {
-    tree_html.innerHTML += '<div class="tree" id="displayTree"><ul>' + traverseParseTable(parseTable, 0, parseTable.length - 1, i) + '</ul></div><br/>';
+    if (parseTable[0][parseTable.length - 1][i]['rule'] != 'S') continue;
+    tree_html.innerHTML += '<div class="tree mb-10" id="displayTree"><ul>' + traverseParseTable(parseTable, 0, parseTable.length - 1, i) + '</ul></div><br/>';
     // break;
 }
 
