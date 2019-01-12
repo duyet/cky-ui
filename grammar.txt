@@ -1,4 +1,4 @@
-# Em đi về buổi tối.
+# 1. Em đi về buổi tối.
 S -> NP VP
 VP -> VP NP
 VP -> VB Advp
@@ -7,7 +7,7 @@ VB -> đi
 Advp -> về
 NP -> buổi-tối
 
-# Trăng mở cửa chào em. 
+# 2. Trăng mở cửa chào em. 
 S -> NP VP
 VP -> VP VP
 VP -> VB NP
@@ -17,7 +17,7 @@ NP -> em
 VB -> mở
 VB -> chào
 
-# những đóa hoa sen theo chân em lấp lánh. 
+# 3. Những đóa hoa sen theo chân em lấp lánh. 
 S -> NP VP
 NP -> DT NP
 NP -> UN NP
@@ -34,20 +34,7 @@ NN -> chân
 PRP -> em
 Adjp -> lấp-lánh
 
-# Mùa hè trời không lạnh
-S -> NP VP
-NP -> NN NN
-VP -> RB Adjp
-NN -> mùa-hè
-NN -> trời
-RB -> không
-Adjp -> lạnh
-
-NP -> mùa-hè
-NP -> trời
-S -> NP Adjp
-
-# Váy ngắn vờn chân thon
+# 4. Váy ngắn vờn chân thon
 S -> NP VP
 NP -> NN Adjp
 VP -> VP NP
@@ -59,7 +46,7 @@ VP -> vờn
 NN -> chân
 Adjp -> thon
 
-# Anh vẫn thấy màu son trên môi em ánh sáng
+# 5. Anh vẫn thấy màu son trên môi em ánh sáng
 S -> NP VP
 VP -> VP NP
 VP -> Advp VB
@@ -81,7 +68,7 @@ PRP -> em
 JJ -> ánh
 JJ -> sáng
 
-# Anh vẫn nghe lãng mạn trong hồn anh ngân vang
+# 6. Anh vẫn nghe lãng mạn trong hồn anh ngân vang
 S -> NP VP
 VP -> VP NP
 VP -> Advp VB
@@ -100,7 +87,7 @@ PRP -> anh
 VB -> ngân
 NP -> vang
 
-# Gió đại dương như tràn lấp đầy từng con phố
+# 7. Gió đại dương như tràn lấp đầy từng con phố
 S -> NP VP
 NP -> NN NN
 VP -> MD VP
@@ -117,6 +104,44 @@ DT -> từng
 NN -> con-phố
 
 
+# 8. Mây trôi lang thang cho hạ buồn
+S -> NP VP
+VP -> VP PP
+VP -> VB VP
+PP -> IN NP
+NP -> NN Adjp
+NP -> mây
+VB -> trôi
+VP -> lang-thang
+IN -> cho
+NN -> hạ
+Adjp -> buồn
+
+# 9. Em đã vội bỏ trường xa phố phường
+S -> NP VP
+VP -> VP NP
+VP -> Advp VP
+NP -> NN NN
+NP -> em
+Advp -> đã-vội
+VP -> bỏ
+NN -> trường-xa
+NN -> phố-phường
+
+# 10. Em đi lấy chồng về nơi xứ xa
+S -> NP VP
+VP -> Advp VP
+VP -> VP PP
+VP -> VB NP
+PP -> IN NP
+NP -> NN NN
+Advp -> đi
+VB -> lấy
+NP -> chồng
+IN -> về-nơi
+NN -> xứ
+NN -> xa
+
 # preprocess ======= 
 # replace: "buổi tối" = buổi-tối
 # replace: "con phố" = con-phố
@@ -124,3 +149,8 @@ NN -> con-phố
 # replace: "lấp lánh" = lấp-lánh
 # replace: "lãng mạn" = lãng-mạn
 # replace: "mùa hè" = mùa-hè
+# replace: "lang thang" = lang-thang
+# replace: "đã vội" = đã-vội
+# replace: "trường xa" = trường-xa
+# replace: "phố phường" = phố-phường
+# replace: "về nơi" = về-nơi
