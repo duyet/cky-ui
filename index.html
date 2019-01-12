@@ -15,12 +15,33 @@
     <script src="render_tree.js" type="text/javascript"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+        clean_rules = []
+
         function clean_input(str) {
-          return str.replace(/,\./g, '')
+          str = str.replace(/,\./g, '')
+
+          console.log('clean_rules', clean_rules)
+          for (var rule of clean_rules) {
+            str = str.replace(rule.src, rule.dest)
+          }
+
+          return str
         }
 
         $.get('grammar.txt', function(data) {
             $('#grammar').val(data);
+
+            var rules = data.split('\n')
+            for (var rule of rules) {
+              if (rule.indexOf('replace: ') > -1) {
+                var replace_rule = rule.split(':')[1].trim().replace(/"/g, '')
+                console.log('replace_rule', replace_rule.split(' = '))
+                replace_rule = replace_rule.split(' = ')
+                if (replace_rule.length)
+                  clean_rules.push({src: replace_rule[0], dest: replace_rule[1]})
+              }
+            }
+            console.log(clean_rules)
         })
         $.get('bienthe.txt', function(data) {
             data = data.split('\n')
@@ -30,11 +51,12 @@
             $('#bienthe').html(bienthe);
             $('#bienthe').change(function(e) {
               var sentence = $(this).val()
+              if (!sentence) return;
               $('#input_text').val(sentence)
               $('#form').submit()
               $('html, body').animate({
                   scrollTop: $("#cky_output").offset().top
-              }, 1000);
+              }, 300);
               e.preventDefault()
             })
         })
@@ -44,6 +66,8 @@
         function start() {
             var grammar_val = $('#grammar').val()
             var input_text_val = clean_input($('#input_text').val())
+            $('#input_text').val(input_text_val)
+
             do_parse(grammar_val, input_text_val);
             render_tree(grammar_val, input_text_val, 'tree_output')
 
@@ -76,7 +100,7 @@
                         <strong class="d-inline-block mb-2 text-primary">Gammar (CNF)</strong>
                         <div class="form-group">
                             <textarea name="grammar" id="grammar" class="form-control" rows="10" placeholder="e.g. S -> NP VP" aria-describedby="helpGrammar">
-              </textarea>
+                            </textarea>
                             <small id="helpGrammar" class="text-muted">CNF Format</small>
                         </div>
                     </div>
@@ -87,7 +111,7 @@
                     <div class="card-body">
                         <strong class="d-inline-block mb-2 text-primary">Một số biến thể</strong>
                         <div class="ml-10">
-                            <select multiple="" class="form-control" size="15" id="bienthe">
+                            <select class="form-control" size="15" id="bienthe">
                                 
                             </select>
                         </div>
