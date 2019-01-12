@@ -62,8 +62,6 @@ function Grammar(grammar) {
       continue;
     var a = re_rule.exec(r);
 
-    console.log('re_a', a)
-
     var x = r.trim().split('->')
     var a = []
     
@@ -105,6 +103,7 @@ function Grammar(grammar) {
       if (r[1] == s)
         res.push(r[0]);
     }
+
     return res;
   }
 
@@ -112,8 +111,10 @@ function Grammar(grammar) {
     var res = new Array();
     for (var i = 0; i < this._non_terminal_rules.length; ++i) {
       var r = this._non_terminal_rules[i];
-      if (r[1] == s && r[2] == t)
+      if (r[1] == s && r[2] == t) {
+        console.log(r, s, t, 'r --- s --- t')
         res.push(r[0]);
+      }
     }
     return res;
   }
@@ -138,6 +139,7 @@ function allocate_chart(N) {
 function cky_offline(grammar, sentence, eh) {
   var G = new Grammar(grammar);
   console.log(sentence)
+
   var S = tokenize_sentence(sentence);
   var N = S.length;
   var C = allocate_chart(N);
@@ -147,7 +149,7 @@ function cky_offline(grammar, sentence, eh) {
     var y = N - x - 1;
     eh.active_cell_changed(x, y);
     C[x][y] = G.left_hand_sides(S[y]);
-    eh.cell_updated(x, y, C[x][y]);
+    eh.cell_updated(x, y, C[x][y]); 
 
   }
   for (var x = 1; x < N; ++x) {
