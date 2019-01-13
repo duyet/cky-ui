@@ -1,5 +1,6 @@
 # CKY Algorithm
-CKY algorithm for generating parse trees, given a CNF and a sentence.
 
+Online demo: https://duyetdev.github.io/cky-ui/
 
-![demo.gif](demo.gif)
+![screenshot-1.png](screenshot-1.png)
+![screenshot-2.png](screenshot-2.png)

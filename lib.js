@@ -74,13 +74,6 @@ function Grammar(grammar) {
 
     a.unshift(0)
 
-    console.log('split_a', a)
-
-    // if (a == null) {
-    //   throw "bad rule syntax: " + r;
-    //   continue
-    // }
-
     if (a[3]) {
       var new_rule = new Array(a[1], a[2], a[3]);
       this._non_terminal_rules.push(new_rule);
@@ -184,7 +177,6 @@ function cky_offline(grammar, sentence, eh) {
             }
           }
         }
-
       }
     }
   }

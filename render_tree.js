@@ -38,7 +38,10 @@ function render_tree(grammar, input_text, tree_output_id) {
                     var rightSubtreeRoots = parseTable[mid][right];
                     for (var leftRootIndx in leftSubtreeRoots) {
                         for (var rightRootIndx in rightSubtreeRoots) {
-                            var rls = grammar[makeKey([leftSubtreeRoots[leftRootIndx]['rule'], rightSubtreeRoots[rightRootIndx]['rule']])];
+                            var rls = grammar[
+                            makeKey([leftSubtreeRoots[leftRootIndx]['rule'],
+                                rightSubtreeRoots[rightRootIndx]['rule']
+                            ])];
                             if (rls) {
                                 for (var r in rls) {
                                     parseTable[left][right].push({
@@ -174,8 +177,10 @@ function render_tree(grammar, input_text, tree_output_id) {
         return n[0] != '#' && n.trim().length > 0
     })
     grammar = unique(grammar)
+    console.log(grammarToHashMap(grammar), 'grammarToHashMap(grammar)')
 
     var parseTable = parse(grammarToHashMap(grammar), input_text.split(' '));
+    console.log(parseTable, 'parseTable')
 
     var tree_html = document.getElementById(tree_output_id);
     tree_html.innerHTML = ''

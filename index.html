@@ -16,53 +16,60 @@
     <script type="text/javascript">
     $(document).ready(function() {
         clean_rules = []
+        var remote_src = 'https://raw.githubusercontent.com/duyetdev/cky-ui/master/'
 
         function clean_input(str) {
-          str = str.toLowerCase()
-          str = str.replace(/,\./g, '')
+            str = str.toLowerCase()
+            str = str.replace(/,\./g, '')
 
-          console.log('clean_rules', clean_rules)
-          for (var rule of clean_rules) {
-            str = str.replace(rule.src, rule.dest)
-          }
+            console.log('clean_rules', clean_rules)
+            for (var rule of clean_rules) {
+                str = str.replace(rule.src, rule.dest)
+            }
 
-          return str
+            return str
         }
 
-        $.get('grammar.txt', function(data) {
+        function getGrammar(data) {
             $('#grammar').val(data);
 
             var rules = data.split('\n')
             for (var rule of rules) {
-              if (rule.indexOf('replace: ') > -1) {
-                var replace_rule = rule.split(':')[1].trim().replace(/"/g, '')
-                console.log('replace_rule', replace_rule.split(' = '))
-                replace_rule = replace_rule.split(' = ')
-                if (replace_rule.length)
-                  clean_rules.push({src: replace_rule[0], dest: replace_rule[1]})
-              }
+                if (rule.indexOf('replace: ') > -1) {
+                    var replace_rule = rule.split(':')[1].trim().replace(/"/g, '')
+                    console.log('replace_rule', replace_rule.split(' = '))
+                    replace_rule = replace_rule.split(' = ')
+                    if (replace_rule.length)
+                        clean_rules.push({ src: replace_rule[0], dest: replace_rule[1] })
+                }
             }
             console.log(clean_rules)
+        }
+
+        $.get('grammar.txt', getGrammar).fail(function() {
+            $.get(remote_src + 'grammar.txt', getGrammar)
         })
-        $.get('bienthe.txt', function(data) {
+
+        function getBienThe(data) {
             data = data.split('\n')
             $('#input_text').val(data[0])
 
-            var bienthe = data.map(function(t) { return '<option>'+ t +'</option>' })
+            var bienthe = data.map(function(t) { return '<option>' + t + '</option>' })
             $('#bienthe').html(bienthe);
             $('#bienthe').change(function(e) {
-              var sentence = $(this).val()
-              if (!sentence) return;
-              $('#input_text').val(sentence)
-              $('#form').submit()
-              $('html, body').animate({
-                  scrollTop: $("#cky_output").offset().top
-              }, 300);
-              e.preventDefault()
+                var sentence = $(this).val()
+                if (!sentence) return;
+                $('#input_text').val(sentence)
+                $('#form').submit()
+                $('html, body').animate({
+                    scrollTop: $("#cky_output").offset().top
+                }, 300);
+                e.preventDefault()
             })
+        }
+        $.get('bienthe.txt', getBienThe).fail(function() {
+            $.get(remote_src + 'bienthe.txt', getBienThe)
         })
-
-        $('#input_text').val('nó vừa gặp mấy người bạn trường cũ')
 
         function start() {
             var grammar_val = $('#grammar').val()
@@ -74,7 +81,7 @@
 
             $('html, body').animate({
                 scrollTop: $("#cky_output").offset().top
-            }, 1000);
+            }, 300);
         }
 
         $('#form').submit(function(e) {
@@ -113,14 +120,12 @@
                         <strong class="d-inline-block mb-2 text-primary">Một số biến thể</strong>
                         <div class="ml-10">
                             <select class="form-control" size="15" id="bienthe">
-                                
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <div class="card flex-md-row mb-4 shadow-sm">
@@ -144,7 +149,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-4">
             <div class="col">
                 <h4>Thuật toán CKY</h4>
@@ -160,9 +164,11 @@
                 <div id="tree_output"></div>
             </div>
         </div>
-
         <div class="row mt-4 mb-5">
-          <div class="col"><center><hr />(c) duyet</center></div>
+            <div class="col">
+                <center>
+                    <hr />(c) duyet</center>
+            </div>
         </div>
     </div>
 </body>
