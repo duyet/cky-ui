@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/duyetdev/cky-ui/issues"
   },
-  "homepage": "https://duyetdev.github.io/cky-ui/",
+  "homepage": "https://duyet.github.io/cky-ui/",
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

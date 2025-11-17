@@ -1,7 +1,7 @@
 # CKY Parser - Interactive Visualization
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Pages](https://img.shields.io/badge/demo-live-success.svg)](https://duyetdev.github.io/cky-ui/)
+[![GitHub Pages](https://img.shields.io/badge/demo-live-success.svg)](https://duyet.github.io/cky-ui/)
 [![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen.svg)](https://github.com/duyetdev/cky-ui)
 [![JavaScript](https://img.shields.io/badge/javascript-ES6+-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
@@ -11,7 +11,7 @@
 
 ## 🌟 Live Demo
 
-**[https://duyetdev.github.io/cky-ui/](https://duyetdev.github.io/cky-ui/)**
+**[https://duyet.github.io/cky-ui/](https://duyet.github.io/cky-ui/)**
 
 ## 📖 About
 
@@ -42,7 +42,7 @@ Perfect for:
 
 ### Online
 
-Just visit [https://duyetdev.github.io/cky-ui/](https://duyetdev.github.io/cky-ui/)
+Just visit [https://duyet.github.io/cky-ui/](https://duyet.github.io/cky-ui/)
 
 ### Local Development
 
