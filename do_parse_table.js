@@ -68,11 +68,21 @@ function update_ui() {
  * Sets the content of a table cell
  * @param {number} i - Row index
  * @param {number} j - Column index
- * @param {string} content - Content to display
+ * @param {string|Array} content - Content to display (string or array of non-terminals)
  * @returns {void}
  */
 function set_entry_content(i, j, content) {
     var cell = entry2cell(i, j);
+    // Convert array to string if necessary
+    if (Array.isArray(content)) {
+        content = content.join(',');
+    }
+    // Handle null/undefined content
+    if (content == null) {
+        content = '';
+    }
+    // Convert to string to ensure .replace() works
+    content = String(content);
     content = content.replace(/,/g, ', ');
     content = content.replace(/S/g, '<span style="color:red">S</span>');
     cell.innerHTML = content;
