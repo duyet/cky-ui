@@ -298,3 +298,24 @@ right connector from last child*/
 
 /*Thats all. I hope you enjoyed it.
 Thanks :)*/
+
+/* CKY Table Cell Colors */
+.cell-normal {
+    background-color: #fff !important;
+}
+
+.cell-active {
+    background-color: #FF4500 !important;
+}
+
+.cell-test {
+    background-color: #ADFF2F !important;
+}
+
+.cell-match {
+    background-color: #87CEEB !important;
+}
+
+.cell-update {
+    background-color: #D8BFD8 !important;
+}

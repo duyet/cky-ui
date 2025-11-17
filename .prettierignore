@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Minified files
+*.min.js
+*.min.css
+static/js/*.min.js
+static/css/*.min.css
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Screenshots
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Data files (preserve exact formatting)
+grammar.txt
+bienthe.txt

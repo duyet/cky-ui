@@ -5,7 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CKY UI</title>
+    <title>CKY Parser - Interactive Visualization of CKY Algorithm</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Interactive visualization of the CKY (Cocke-Younger-Kasami) parsing algorithm for context-free grammars in Chomsky Normal Form. Educational tool for NLP and computational linguistics.">
+    <meta name="keywords" content="CKY algorithm, CYK parser, natural language processing, computational linguistics, context-free grammar, CNF, Chomsky Normal Form, parsing visualization">
+    <meta name="author" content="Van-Duyet Le">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="CKY Parser - Interactive Algorithm Visualization">
+    <meta property="og:description" content="Interactive visualization of the CKY parsing algorithm for context-free grammars. Educational tool for NLP students and researchers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://duyetdev.github.io/cky-ui/">
+    <meta property="og:image" content="https://duyetdev.github.io/cky-ui/screenshot-1.png">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CKY Parser - Interactive Visualization">
+    <meta name="twitter:description" content="Educational tool for visualizing the CKY parsing algorithm">
+    <meta name="twitter:image" content="https://duyetdev.github.io/cky-ui/screenshot-1.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#007bff">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet" /> -->
     <link href="static/css/app.css" rel="stylesheet">
@@ -13,83 +39,7 @@
     <script src="lib.js" type="text/javascript"></script>
     <script src="do_parse_table.js" type="text/javascript"></script>
     <script src="render_tree.js" type="text/javascript"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        clean_rules = []
-        var remote_src = 'https://raw.githubusercontent.com/duyetdev/cky-ui/master/'
-
-        function clean_input(str) {
-            str = str.toLowerCase()
-            str = str.replace(/,\./g, '')
-
-            console.log('clean_rules', clean_rules)
-            for (var rule of clean_rules) {
-                str = str.replace(rule.src, rule.dest)
-            }
-
-            return str
-        }
-
-        function getGrammar(data) {
-            $('#grammar').val(data);
-
-            var rules = data.split('\n')
-            for (var rule of rules) {
-                if (rule.indexOf('replace: ') > -1) {
-                    var replace_rule = rule.split(':')[1].trim().replace(/"/g, '')
-                    console.log('replace_rule', replace_rule.split(' = '))
-                    replace_rule = replace_rule.split(' = ')
-                    if (replace_rule.length)
-                        clean_rules.push({ src: replace_rule[0], dest: replace_rule[1] })
-                }
-            }
-            console.log(clean_rules)
-        }
-
-        $.get('grammar.txt', getGrammar).fail(function() {
-            $.get(remote_src + 'grammar.txt', getGrammar)
-        })
-
-        function getBienThe(data) {
-            data = data.split('\n')
-            $('#input_text').val(data[0])
-
-            var bienthe = data.map(function(t) { return '<option>' + t + '</option>' })
-            $('#bienthe').html(bienthe);
-            $('#bienthe').change(function(e) {
-                var sentence = $(this).val()
-                if (!sentence) return;
-                $('#input_text').val(sentence)
-                $('#form').submit()
-                $('html, body').animate({
-                    scrollTop: $("#cky_output").offset().top
-                }, 300);
-                e.preventDefault()
-            })
-        }
-        $.get('bienthe.txt', getBienThe).fail(function() {
-            $.get(remote_src + 'bienthe.txt', getBienThe)
-        })
-
-        function start() {
-            var grammar_val = $('#grammar').val()
-            var input_text_val = clean_input($('#input_text').val())
-            $('#input_text').val(input_text_val)
-
-            do_parse(grammar_val, input_text_val);
-            render_tree(grammar_val, input_text_val, 'tree_output')
-
-            $('html, body').animate({
-                scrollTop: $("#cky_output").offset().top
-            }, 300);
-        }
-
-        $('#form').submit(function(e) {
-            start()
-            e.preventDefault()
-        })
-    })
-    </script>
+    <script src="main.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -97,7 +47,9 @@
         <header class="blog-header py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col text-center">
-                    <a class="blog-header-logo text-dark" href="#">CKY Parser</a>
+                    <h1 class="blog-header-logo text-dark">
+                        <a href="#" aria-label="CKY Parser Home">CKY Parser</a>
+                    </h1>
                 </div>
             </div>
         </header>
@@ -105,9 +57,10 @@
             <div class="col">
                 <div class="card flex-md-row mb-4 shadow-sm">
                     <div class="card-body">
-                        <strong class="d-inline-block mb-2 text-primary">Gammar (CNF)</strong>
+                        <strong class="d-inline-block mb-2 text-primary">Grammar (CNF)</strong>
                         <div class="form-group">
-                            <textarea name="grammar" id="grammar" class="form-control" rows="10" placeholder="e.g. S -> NP VP" aria-describedby="helpGrammar">
+                            <label for="grammar" class="sr-only">Grammar in Chomsky Normal Form</label>
+                            <textarea name="grammar" id="grammar" class="form-control" rows="10" placeholder="e.g. S -> NP VP" aria-describedby="helpGrammar" aria-label="Grammar rules in Chomsky Normal Form">
                             </textarea>
                             <small id="helpGrammar" class="text-muted">CNF Format</small>
                         </div>
@@ -119,7 +72,8 @@
                     <div class="card-body">
                         <strong class="d-inline-block mb-2 text-primary">Một số biến thể</strong>
                         <div class="ml-10">
-                            <select class="form-control" size="15" id="bienthe">
+                            <label for="bienthe" class="sr-only">Example sentences</label>
+                            <select class="form-control" size="15" id="bienthe" aria-label="Select an example sentence to parse">
                             </select>
                         </div>
                     </div>
@@ -138,10 +92,11 @@
                             </div>
                             <div class="row">
                                 <div class="col col-md-10 text-center">
-                                    <input type="text" name="input_text" id="input_text" class="form-control" placeholder="" aria-describedby="helpInput" value="">
+                                    <label for="input_text" class="sr-only">Input sentence to parse</label>
+                                    <input type="text" name="input_text" id="input_text" class="form-control" placeholder="Enter sentence to parse" aria-describedby="helpInput" aria-label="Input sentence to parse" value="">
                                 </div>
                                 <div class="col text-center">
-                                    <button type="submit" class="btn btn-primary btn-outline btn-block" id="submit">Phân tích</button>
+                                    <button type="submit" class="btn btn-primary btn-outline btn-block" id="submit" aria-label="Parse the input sentence">Phân tích</button>
                                 </div>
                             </div>
                         </form>
@@ -151,25 +106,25 @@
         </div>
         <div class="row mt-4">
             <div class="col">
-                <h4>Thuật toán CKY</h4>
-                <div id="cky_output" style="display:none">
-                    <table class="table" id="tsentence"></table>
-                    <table class="table table-bordered" id="tchart" width="97%" height="90%"></table>
+                <h2>Thuật toán CKY</h2>
+                <div id="cky_output" style="display:none" role="region" aria-label="CKY parsing table visualization">
+                    <table class="table" id="tsentence" role="table" aria-label="Input sentence tokens"></table>
+                    <table class="table table-bordered" id="tchart" width="97%" height="90%" role="table" aria-label="CKY parsing chart"></table>
                 </div>
             </div>
         </div>
         <div class="row mt-4 mb-5">
             <div class="col">
-                <h4>Cây cú pháp</h4>
-                <div id="tree_output"></div>
+                <h2>Cây cú pháp</h2>
+                <div id="tree_output" role="region" aria-label="Parse tree visualization"></div>
             </div>
         </div>
-        <div class="row mt-4 mb-5">
-            <div class="col">
-                <center>
-                    <hr />(c) duyet</center>
+        <footer class="row mt-4 mb-5">
+            <div class="col text-center">
+                <hr />
+                <p>&copy; 2025 <a href="https://duyet.net" target="_blank" rel="noopener noreferrer">Van-Duyet Le</a> | <a href="https://github.com/duyetdev/cky-ui" target="_blank" rel="noopener noreferrer">GitHub</a> | MIT License</p>
             </div>
-        </div>
+        </footer>
     </div>
 </body>
 

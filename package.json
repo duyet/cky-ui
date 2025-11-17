@@ -1,0 +1,48 @@
+{
+  "name": "cky-ui",
+  "version": "2.0.0",
+  "description": "Interactive visualization of the CKY (Cocke-Younger-Kasami) parsing algorithm for context-free grammars",
+  "main": "index.html",
+  "scripts": {
+    "lint": "eslint *.js",
+    "lint:fix": "eslint *.js --fix",
+    "format": "prettier --write \"**/*.{js,css,html,md}\"",
+    "format:check": "prettier --check \"**/*.{js,css,html,md}\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "npx http-server -p 8080 -o",
+    "validate": "npm run lint && npm run format:check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duyetdev/cky-ui.git"
+  },
+  "keywords": [
+    "cky",
+    "cyk",
+    "parser",
+    "nlp",
+    "natural-language-processing",
+    "computational-linguistics",
+    "context-free-grammar",
+    "chomsky-normal-form",
+    "algorithm-visualization",
+    "education"
+  ],
+  "author": "Van-Duyet Le <me@duyet.net> (https://duyet.net)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duyetdev/cky-ui/issues"
+  },
+  "homepage": "https://duyetdev.github.io/cky-ui/",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsdoc": "^48.0.2",
+    "http-server": "^14.1.1",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
