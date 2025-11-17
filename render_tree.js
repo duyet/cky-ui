@@ -1,5 +1,15 @@
+/**
+ *
+ * @param grammar
+ * @param input_text
+ * @param tree_output_id
+ */
 function render_tree(grammar, input_text, tree_output_id) {
 
+    /**
+     *
+     * @param dim
+     */
     function create2dArray(dim) {
         var arr = new Array(dim);
         for (var i = 0; i < dim; i++) {
@@ -11,6 +21,10 @@ function render_tree(grammar, input_text, tree_output_id) {
         return arr;
     }
 
+    /**
+     *
+     * @param obj
+     */
     function makeKey(obj) {
         if (typeof obj === 'string') {
             obj = [obj];
@@ -19,6 +33,11 @@ function render_tree(grammar, input_text, tree_output_id) {
         return x;
     }
 
+    /**
+     *
+     * @param grammar
+     * @param tokens
+     */
     function parse(grammar, tokens) {
         var tokLen = tokens.length + 1;
         var parseTable = create2dArray(tokLen);
@@ -39,9 +58,9 @@ function render_tree(grammar, input_text, tree_output_id) {
                     for (var leftRootIndx in leftSubtreeRoots) {
                         for (var rightRootIndx in rightSubtreeRoots) {
                             var rls = grammar[
-                            makeKey([leftSubtreeRoots[leftRootIndx]['rule'],
-                                rightSubtreeRoots[rightRootIndx]['rule']
-                            ])];
+                                makeKey([leftSubtreeRoots[leftRootIndx]['rule'],
+                                    rightSubtreeRoots[rightRootIndx]['rule']
+                                ])];
                             if (rls) {
                                 for (var r in rls) {
                                     parseTable[left][right].push({
@@ -60,6 +79,10 @@ function render_tree(grammar, input_text, tree_output_id) {
         return parseTable;
     }
 
+    /**
+     *
+     * @param rules
+     */
     function grammarToHashMap(rules) {
         var hashMap = {};
         for (var i in rules) {
@@ -80,7 +103,18 @@ function render_tree(grammar, input_text, tree_output_id) {
         return hashMap;
     }
 
+    /**
+     *
+     * @param parseTable
+     * @param left
+     * @param right
+     * @param rootIndex
+     */
     function traverseParseTable(parseTable, left, right, rootIndex) {
+        /**
+         *
+         * @param node
+         */
         function color(node) {
             var colors = {
                 'S': '#b2c5ff',
@@ -95,15 +129,16 @@ function render_tree(grammar, input_text, tree_output_id) {
                 'NN': '#EEE8AA',
                 'IN': '#FFDAB9',
                 'PRP': '#FFE4E1',
-                'VP': '#E0FFFF',
                 'VB': '#F0FFFF',
                 'Advp': '#E6E6FA',
                 'UN': '#FFF0F5',
                 'DT': '#FAFAD2',
-            }
+            };
 
-            if (node in colors) return colors[node]
-            return '#fbfbb9'
+            if (node in colors) {
+                return colors[node];
+            }
+            return '#fbfbb9';
         }
 
 
@@ -172,22 +207,22 @@ function render_tree(grammar, input_text, tree_output_id) {
     //     document.body.innerHTML += '<div class="tree" id="displayTree"><ul>' + traverseParseTable(parseTable, 0, parseTable.length - 1, i) + '</ul></div><br/>';
     // }
 
-    grammar = grammar.split('\n')
+    grammar = grammar.split('\n');
     grammar = grammar.filter(function(n) {
-        return n[0] != '#' && n.trim().length > 0
-    })
-    grammar = unique(grammar)
-    console.log(grammarToHashMap(grammar), 'grammarToHashMap(grammar)')
+        return n[0] != '#' && n.trim().length > 0;
+    });
+    grammar = unique(grammar);
 
     var parseTable = parse(grammarToHashMap(grammar), input_text.split(' '));
-    console.log(parseTable, 'parseTable')
 
     var tree_html = document.getElementById(tree_output_id);
-    tree_html.innerHTML = ''
+    tree_html.innerHTML = '';
 
     var num = 1;
     for (var i in parseTable[0][parseTable.length - 1]) {
-        if (parseTable[0][parseTable.length - 1][i]['rule'] != 'S') continue;
+        if (parseTable[0][parseTable.length - 1][i]['rule'] != 'S') {
+            continue;
+        }
         // tree_html.innerHTML += 'Câu ' + num;
         tree_html.innerHTML += '<div style="display:block"><div class="tree mb-10" id="displayTree"><ul>' +
             traverseParseTable(parseTable, 0, parseTable.length - 1, i) +

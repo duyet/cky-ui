@@ -1,0 +1,67 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jquery": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:jsdoc/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "jsdoc"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "script"
+  },
+  "globals": {
+    "$": "readonly",
+    "jQuery": "readonly",
+    "tchart": "writable",
+    "tsentence": "writable",
+    "cky_offline": "writable",
+    "Grammar": "writable",
+    "tokenize_sentence": "writable",
+    "allocate_chart": "writable",
+    "unique": "writable",
+    "grammarToHashMap": "writable",
+    "makeKey": "writable",
+    "do_parse": "writable",
+    "render_tree": "writable",
+    "paint_cell": "writable",
+    "set_entry_content": "writable",
+    "entry2cell": "writable",
+    "create_chart": "writable",
+    "set_sentence": "writable",
+    "pause_resume_animation": "writable",
+    "COLOR_NORMAL_CELL": "writable",
+    "COLOR_ACTIVE_CELL": "writable",
+    "COLOR_TEST_CELL": "writable",
+    "COLOR_MATCH_CELL": "writable",
+    "COLOR_UPDATE_CELL": "writable"
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-unused-vars": "warn",
+    "no-undef": "warn",
+    "eqeqeq": "warn",
+    "curly": "off",
+    "brace-style": "off",
+    "indent": "off",
+    "quotes": "off",
+    "semi": "off",
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "no-redeclare": "off",
+    "no-dupe-keys": "error",
+    "jsdoc/require-jsdoc": "off",
+    "jsdoc/require-param": "off",
+    "jsdoc/require-returns": "off",
+    "jsdoc/require-param-description": "off",
+    "jsdoc/require-param-type": "off",
+    "jsdoc/check-types": "off"
+  }
+}
